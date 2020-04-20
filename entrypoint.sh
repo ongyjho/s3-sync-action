@@ -37,7 +37,6 @@ ${AWS_REGION}
 text
 EOF
  
-echo "::set-output name=path::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})"
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
@@ -48,6 +47,8 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
 
 
 echo "hello"
+echo "${{ needs.get-file-changes.outputs.path }})"
+
 
 # Clear out credentials after we're done.
 # We need to re-run `aws configure` with bogus input instead of
