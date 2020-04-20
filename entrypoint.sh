@@ -36,6 +36,8 @@ ${AWS_SECRET_ACCESS_KEY}
 ${AWS_REGION}
 text
 EOF
+ 
+echo "::set-output name=path::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})"
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
