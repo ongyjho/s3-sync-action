@@ -37,7 +37,7 @@ ${AWS_REGION}
 text
 EOF
 
-FILES = $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)
+FILES=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)
 echo $FILES
 
 # Sync using our dedicated profile and suppress verbose messages.
