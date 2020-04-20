@@ -47,7 +47,8 @@ sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
 
 
 echo "hello"
-echo "${{ needs.get-file-changes.outputs.path }})"
+echo ${{ needs.get-file-changes.outputs.path }}
+echo "path si"
 
 
 # Clear out credentials after we're done.
