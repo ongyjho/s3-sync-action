@@ -37,17 +37,12 @@ ${AWS_REGION}
 text
 EOF
 
-FILES=()
-for i in $( git status -s | sed 's/\s*[a-zA-Z?]\+ \(.*\)/\1/' ); do
-    FILES+=( "$i" )
-done
-echo "${FILES[@]}"
-
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
-sh -c "aws s3 sync ${SOURCE_DIR:-.}/${FILES} s3://${AWS_S3_BUCKET}/${DEST_DIR}/${FILES} \
+sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile s3-sync-action \
               --no-progress \
+              --exact-timestamps \
               ${ENDPOINT_APPEND} $*" \
 
 
